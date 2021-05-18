@@ -1,4 +1,4 @@
-# Android Self Charging Project
+# Android Battery Level Reporter ( & Self Charging Control )
 
 In this example I will build small solution for having Android device plugged in to Smart Plug and charged only when battery level wil go down.
 
@@ -119,3 +119,5 @@ Of course, you will need to add payload to your event and send request using POS
  Another service, which can be used as middle layer could be [ThingSpeak](https://thingspeak.com). It allows to create Channels with own REST API and attach "React" to it. This way you could send battery level values to ThingSpeak via REST API (and vizualize them over time) and depending on "React" logic trigger proper IFTTT API (Applet).
 
  ## Step 3. Implement Android application.
+
+ @todo. describe app & usage of ThingSpeak (as app has)
