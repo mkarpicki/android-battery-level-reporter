@@ -21,8 +21,8 @@ class ReporterBackgroundService(): Service() {
 
     private fun send() {
 
-        val batteryStatus: Intent? = IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { ifilter ->
-            applicationContext.registerReceiver(null, ifilter)
+        val batteryStatus: Intent? = IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { filter ->
+            applicationContext.registerReceiver(null, filter)
         }
 
         val batteryPercentage: Float? = batteryStatus?.let { intent ->
@@ -40,7 +40,7 @@ class ReporterBackgroundService(): Service() {
         val scope = CoroutineScope(Dispatchers.IO)
 
         scope.launch {
-            ThingSpeakClient.send(batteryPercentage.toString(), null)
+            ThingSpeakClient.send(batteryPercentage.toString(), "field1")
         }
     }
 
