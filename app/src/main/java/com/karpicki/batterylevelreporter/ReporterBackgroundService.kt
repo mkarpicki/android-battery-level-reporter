@@ -15,7 +15,7 @@ import kotlin.concurrent.schedule
 
 class ReporterBackgroundService(): Service() {
 
-    private val nextRunInMilliseconds : Long = 30 * Constants.minute.toLong()
+    private val nextRunInMilliseconds : Long = 10 * Constants.minute.toLong()
     //private val nextRunInMilliseconds : Long = 10 * Constants.second.toLong()
     private var lastBatteryLevel : Float? = 0F
 
@@ -40,7 +40,13 @@ class ReporterBackgroundService(): Service() {
         val scope = CoroutineScope(Dispatchers.IO)
 
         scope.launch {
-            ThingSpeakClient.send(batteryPercentage.toString(), "field1")
+            //var status: Int = 0
+
+            // option 2
+            IFTTTClient.send("bt_server_battery_percentage", batteryPercentage.toString())
+
+            // option 3
+            //ThingSpeakClient.send(batteryPercentage.toString(), "field1")
         }
     }
 
