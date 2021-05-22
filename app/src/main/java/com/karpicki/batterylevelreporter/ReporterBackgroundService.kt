@@ -42,6 +42,15 @@ class ReporterBackgroundService(): Service() {
         scope.launch {
             //var status: Int = 0
 
+            //option 1
+//            if (batteryPercentage != null) {
+//                if (batteryPercentage < 5) {
+//                    IFTTTClient.send("bt_server_battery_low", batteryPercentage.toString())
+//                } else if (batteryPercentage > 95) {
+//                    IFTTTClient.send("bt_server_battery_full", batteryPercentage.toString())
+//                }
+//            }
+
             // option 2
             IFTTTClient.send("bt_server_battery_percentage", batteryPercentage.toString())
 
