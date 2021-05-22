@@ -95,7 +95,10 @@ Write logic of Filter (this example is used as Filter which will prevent switchi
 ```javascript
 var percentage = parseInt(MakerWebhooks.event.Value1);
 
-if (percentage < 95 && !isNaN(percentage)) {
+if (isNaN(percentage)) {
+  Smartlife.turnOff.skip();
+
+} else if (percentage < 95) {
   Smartlife.turnOff.skip();
 }
 ```

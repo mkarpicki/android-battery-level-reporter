@@ -14,8 +14,8 @@ class IFTTTClient {
             withContext(Dispatchers.IO) {
 
                 var responseCode: Int
-                val mediaType: MediaType? = MediaType.parse("application/geo+json; charset=utf-8");
-                val json = "{'value1':'$value'}"
+                val mediaType: MediaType? = MediaType.parse("application/json; charset=utf-8");
+                val json = "{\"value1\":\"$value\"}"
 
                 val apiKey = BuildConfig.IFTTT_API_KEY
                 val body: RequestBody = RequestBody.create(mediaType, json)
