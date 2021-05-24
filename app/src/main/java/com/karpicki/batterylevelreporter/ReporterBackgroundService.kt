@@ -15,7 +15,7 @@ import kotlin.concurrent.schedule
 
 class ReporterBackgroundService(): Service() {
 
-    private val nextRunInMilliseconds : Long = Constants.minute.toLong() * 20
+    private val nextRunInMilliseconds : Long = Constants.minute.toLong() //* 20
     //private val nextRunInMilliseconds : Long = 10 * Constants.second.toLong()
     private var lastBatteryLevel : Float? = 0F
 
