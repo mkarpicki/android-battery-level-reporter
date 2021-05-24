@@ -32,37 +32,6 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 
-//    private fun send(value: Float) {
-//
-//        var responseCode: Int
-//
-//        //val apiKey = BuildConfig.THING_SPEAK_API_KEY
-//        //val field = field ?: "field1"
-//
-//        val apiKey = "R8W1JR9JV6JOS0FT"
-//        val field = "field1"
-//
-//
-//        try {
-//            val client = OkHttpClient();
-//
-//            // @todo - move api_key to app config
-//            val request: Request = Request.Builder()
-//                .url("https://api.thingspeak.com/update?api_key=$apiKey&$field=$value")
-//                .get()
-//                .build()
-//
-//            val response: Response = client.newCall(request).execute()
-//
-//            Log.d("TAG", "response.code():" + response.code())
-//            //response.body()?.string()
-//            responseCode = response.code()
-//
-//        } catch (e: Exception) {
-//            responseCode = 500
-//        }
-//    }
-
     private fun start() {
         if (isBackgroundServiceRunning) {
             return
@@ -95,10 +64,6 @@ class MainActivity : AppCompatActivity() {
         isBackgroundServiceRunning = true
     }
 
-//    private fun stop() {
-//        this.unregisterReceiver(this.mBatInfoReceiver);
-//    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
             putBoolean(Constants.semaphoreName, isBackgroundServiceRunning)
@@ -106,26 +71,16 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) { // Here You have to restore count value
-        super.onRestoreInstanceState(savedInstanceState)
-        savedInstanceState.getBoolean(Constants.semaphoreName)
-            .also { isBackgroundServiceRunning = it }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (savedInstanceState != null) {
+            savedInstanceState.getBoolean(Constants.semaphoreName)
+                .also { isBackgroundServiceRunning = it }
+        }
+
         start()
     }
 
-//    override fun onDestroy() {
-//        stop()
-//        super.onDestroy()
-//    }
-//
-//    override fun onPause() {
-//        stop()
-//        super.onPause()
-//    }
 }
