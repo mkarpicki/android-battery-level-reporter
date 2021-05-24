@@ -41,6 +41,7 @@ class IFTTTClient {
                     responseCode = response.code()
 
                 } catch (e: Exception) {
+                    Log.e("IFTTT", e.message.toString())
                     responseCode = 500
                 }
                 responseCode

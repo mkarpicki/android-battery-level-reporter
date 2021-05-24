@@ -15,7 +15,7 @@ import kotlin.concurrent.schedule
 
 class ReporterBackgroundService(): Service() {
 
-    private val nextRunInMilliseconds : Long = 10 * Constants.minute.toLong()
+    private val nextRunInMilliseconds : Long = Constants.minute.toLong() * 20
     //private val nextRunInMilliseconds : Long = 10 * Constants.second.toLong()
     private var lastBatteryLevel : Float? = 0F
 
@@ -31,9 +31,12 @@ class ReporterBackgroundService(): Service() {
             level * 100 / scale.toFloat()
         }
 
-        if (lastBatteryLevel == batteryPercentage) {
-            return
-        }
+//        if (lastBatteryLevel == batteryPercentage) {
+//            return
+//        }
+
+        Log.i("ReporterService:level", batteryPercentage.toString())
+        println("battery:level:" + batteryPercentage.toString())
 
         lastBatteryLevel = batteryPercentage
 
@@ -65,6 +68,9 @@ class ReporterBackgroundService(): Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         Log.i("ReporterService", "start")
+
+        println(java.util.Calendar.getInstance().time.toString())
+        Log.i("onStart", java.util.Calendar.getInstance().time.toString())
 
         send()
 
