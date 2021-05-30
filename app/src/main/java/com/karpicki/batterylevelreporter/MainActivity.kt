@@ -17,50 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     private var isReceiverRegistered = false
 
-    private val mBatInfoReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-
-        private var lastBatteryLevel : Float = 0F
-
-        override fun onReceive(ctxt: Context?, intent: Intent) {
-            val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
-            val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-            val batteryPercentage = level * 100 / scale.toFloat()
-            val scope = CoroutineScope(Dispatchers.IO)
-
-            Log.i("BroadcastReceiver:level", batteryPercentage.toString())
-            println("BroadcastReceiver:level: $batteryPercentage")
-
-            if (lastBatteryLevel == batteryPercentage) {
-                return
-            }
-
-            scope.launch {
-                var status: Int
-
-                //option 1
-//              if (batteryPercentage != null) {
-//                  if (batteryPercentage < 5) {
-//                      status = IFTTTClient.send("bt_server_battery_low", batteryPercentage.toString())
-//                  } else if (batteryPercentage > 95) {
-//                      status = IFTTTClient.send("bt_server_battery_full", batteryPercentage.toString())
-//                  }
-//              }
-
-                // option 2
-                status = IFTTTClient.send("bt_server_battery_percentage", batteryPercentage.toString())
-
-                // option 3
-                //status = ThingSpeakClient.send(batteryPercentage.toString(), "field1")
-
-                println("BroadcastReceiver:status: $status")
-
-                if (status in 200..399) {
-                    lastBatteryLevel = batteryPercentage
-                }
-            }
-        }
-    }
-
     private fun start() {
         if (isReceiverRegistered) {
             return
@@ -72,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         filter.addAction(Intent.ACTION_BATTERY_OKAY)
 
         this.registerReceiver(
-            this.mBatInfoReceiver,
+            BatteryLevelReceiver(),
             filter
         );
 
