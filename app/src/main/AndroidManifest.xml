@@ -22,19 +22,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".ReporterBackgroundService"
-            android:enabled="true"
-            android:exported="true" />
-
-<!--        <receiver android:name=".BatteryLevelReceiver">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.BATTERY_LOW"/>-->
-<!--                <action android:name="android.intent.action.BATTERY_OKAY"/>-->
-<!--                <action android:name="android.intent.action.BATTERY_CHANGED"/>-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
-
     </application>
 
 </manifest>

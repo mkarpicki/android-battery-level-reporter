@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private var isBackgroundServiceRunning = false
+    private var isReceiverRegistered = false
     private var lastBatteryLevel : Float = 0F
 
     private val mBatInfoReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
             Log.i("BroadcastReceiver:level", batteryPercentage.toString())
             println("BroadcastReceiver:level:" + batteryPercentage.toString())
-
 
             if (lastBatteryLevel == batteryPercentage) {
                 return
@@ -57,13 +56,11 @@ class MainActivity : AppCompatActivity() {
                     lastBatteryLevel = batteryPercentage
                 }
             }
-
-
         }
     }
 
     private fun start() {
-        if (isBackgroundServiceRunning) {
+        if (isReceiverRegistered) {
             return
         }
 
@@ -77,15 +74,12 @@ class MainActivity : AppCompatActivity() {
             filter
         );
 
-        //val reportIntent = Intent(applicationContext, ReporterBackgroundService::class.java)
-        //startService(reportIntent)
-
-        isBackgroundServiceRunning = true
+        isReceiverRegistered = true
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
-            putBoolean(Constants.semaphoreName, isBackgroundServiceRunning)
+            putBoolean(Constants.semaphoreName, isReceiverRegistered)
         }
         super.onSaveInstanceState(outState)
     }
@@ -96,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState != null) {
             savedInstanceState.getBoolean(Constants.semaphoreName)
-                .also { isBackgroundServiceRunning = it }
+                .also { isReceiverRegistered = it }
         }
 
         //window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
