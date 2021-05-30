@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             val scope = CoroutineScope(Dispatchers.IO)
 
             Log.i("BroadcastReceiver:level", batteryPercentage.toString())
-            println("BroadcastReceiver:level:" + batteryPercentage.toString())
+            println("BroadcastReceiver:level: $batteryPercentage")
 
             if (lastBatteryLevel == batteryPercentage) {
                 return
@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
                 // option 3
                 //status = ThingSpeakClient.send(batteryPercentage.toString(), "field1")
 
-                println("BroadcastReceiver:status:" + status.toString())
+                println("BroadcastReceiver:status: $status")
 
-                if (status >= 200 && status < 400) {
+                if (status in 200..399) {
                     lastBatteryLevel = batteryPercentage
                 }
             }
