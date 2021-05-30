@@ -6,17 +6,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
 import android.util.Log
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
 
 
 class MainActivity : AppCompatActivity() {
@@ -73,9 +67,14 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        val filter = IntentFilter()
+        filter.addAction(Intent.ACTION_BATTERY_CHANGED)
+        filter.addAction(Intent.ACTION_BATTERY_LOW)
+        filter.addAction(Intent.ACTION_BATTERY_OKAY)
+
         this.registerReceiver(
             this.mBatInfoReceiver,
-            IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+            filter
         );
 
         //val reportIntent = Intent(applicationContext, ReporterBackgroundService::class.java)
