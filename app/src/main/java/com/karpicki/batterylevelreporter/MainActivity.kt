@@ -16,9 +16,11 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private var isReceiverRegistered = false
-    private var lastBatteryLevel : Float = 0F
 
     private val mBatInfoReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+
+        private var lastBatteryLevel : Float = 0F
+
         override fun onReceive(ctxt: Context?, intent: Intent) {
             val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
             val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
