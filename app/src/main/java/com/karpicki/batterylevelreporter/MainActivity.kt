@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+// https://stackoverflow.com/questions/6391902/how-do-i-start-my-app-on-startup
 
 class MainActivity : AppCompatActivity() {
 
