@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Bundle
+import android.os.PowerManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
@@ -32,6 +33,18 @@ class MainActivity : AppCompatActivity() {
             BatteryLevelReceiver(),
             filter
         );
+
+        val wakeLock: PowerManager.WakeLock =
+            (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
+                newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyApp::MyWakelockTag").apply {
+                    acquire()
+                }
+            }
+
+//        this.registerReceiver(
+//            MyWakefulReceiver(),
+//            IntentFilter()
+//        );
 
         isReceiverRegistered = true
     }

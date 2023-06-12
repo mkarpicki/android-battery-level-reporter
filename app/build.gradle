@@ -9,6 +9,12 @@ def getThingSpeakApiKey() {
     return properties.getProperty("thing-speak.api-key")
 }
 
+def getThingSpeakField() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("thing-speak.field")
+}
+
 def getIFTTTApiKey() {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -33,10 +39,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "THING_SPEAK_API_KEY", "\""+getThingSpeakApiKey()+"\"")
+            buildConfigField("String", "THING_SPEAK_FIELD", "\""+getThingSpeakField()+"\"")
             buildConfigField("String", "IFTTT_API_KEY", "\""+getIFTTTApiKey()+"\"")
         }
         debug {
             buildConfigField("String", "THING_SPEAK_API_KEY", "\""+getThingSpeakApiKey()+"\"")
+            buildConfigField("String", "THING_SPEAK_FIELD", "\""+getThingSpeakField()+"\"")
             buildConfigField("String", "IFTTT_API_KEY", "\""+getIFTTTApiKey()+"\"")
         }
     }
@@ -47,6 +55,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'com.karpicki.batterylevelreporter'
 }
 
 dependencies {

@@ -39,10 +39,10 @@ class BatteryLevelReceiver : BroadcastReceiver() {
 //              }
 
             // option 2
-            val status = IFTTTClient.send("bt_server_battery_percentage", batteryPercentage.toString())
+            //val status = IFTTTClient.send("bt_server_battery_percentage", batteryPercentage.toString())
 
             // option 3
-            //status = ThingSpeakClient.send(batteryPercentage.toString(), "field1")
+            val status = ThingSpeakClient.send(batteryPercentage.toString(), "field3")
 
             println("BroadcastReceiver:status: $status")
 
