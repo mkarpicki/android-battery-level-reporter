@@ -36,6 +36,12 @@
 
         </receiver>
 
+<!--        <receiver android:name=".BatteryLevelReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.BATTERY_CHANGED" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+
 <!--        <receiver android:name=".MyWakefulReceiver"></receiver>-->
 
     </application>
