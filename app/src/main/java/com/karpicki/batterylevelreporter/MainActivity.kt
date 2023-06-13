@@ -24,20 +24,20 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val filter = IntentFilter()
-        filter.addAction(Intent.ACTION_BATTERY_CHANGED)
-        filter.addAction(Intent.ACTION_BATTERY_LOW)
-        filter.addAction(Intent.ACTION_BATTERY_OKAY)
-
-        this.registerReceiver(
-            BatteryLevelReceiver(),
-            filter
-        );
+//        val filter = IntentFilter()
+//        filter.addAction(Intent.ACTION_BATTERY_CHANGED)
+//        filter.addAction(Intent.ACTION_BATTERY_LOW)
+//        filter.addAction(Intent.ACTION_BATTERY_OKAY)
+//
+//        this.registerReceiver(
+//            BatteryLevelReceiver(),
+//            filter
+//        );
 
         val wakeLock: PowerManager.WakeLock =
             (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
                 newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyApp::MyWakelockTag").apply {
-                    acquire()
+                    acquire(30*60*1000L)
                 }
             }
 
